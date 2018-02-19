@@ -1,3 +1,40 @@
-<p>
-  register works!
-</p>
+
+<form #registerForm="ngForm">
+  <hr>
+  <h3>Register</h3>
+  <hr>
+
+
+ <div class="form-group">
+      <label for="first-name">
+         Name
+     </label>
+      <input #name="ngModel" [(ngModel)]="user.name" type="text" required minlength="2" class="form-control" id="first-name" name="first-name">
+
+  </div>
+
+ <div class="form-group">
+      <label for="email">Email address</label>
+      <input #email="ngModel" [(ngModel)]="user.email" type="email" class="form-control" id="email" name="email" required email>
+   
+  </div>
+
+ <div class="form-group">
+      <label for="password">
+         Password 
+     </label>
+      <input #password="ngModel" [(ngModel)]="user.password" required minlength="8" pattern="\w*[0-9]{1,}\w*" [class.alert-danger]=" password.invalid && password.dirty "
+          type="password" class="form-control" id="password" name="password">
+  </div>
+
+
+ <div class="form-group">
+      <label for="password_confirmation">
+         Confirm Password
+     </label>
+      <input #confirmPassword="ngModel" [(ngModel)]="user.confirmPassword" required [class.alert-danger]=" confirmPassword.invalid && confirmPassword.dirty"
+          type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+  </div>
+
+ <button type="submit" class="btn btn-primary">Register</button>
+</form>
