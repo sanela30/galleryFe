@@ -1,6 +1,6 @@
 <h1>Login</h1>
 
-<form #loginForm="ngForm">
+<form #loginForm="ngForm" (ngSubmit)="login(email.value, password.value)">
     <div class="form-group">
       <label>Email address</label>
       <input #email name='email' type="text" class="form-control">
