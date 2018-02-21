@@ -26,10 +26,16 @@ export class RegisterComponent{
   		this.user.firstName, 
    		this.user.lastName, 
   		this.user.email, 
-   		this.user.password
+			 this.user.password,
+			 this.user.password_confirmation
    	).subscribe(
-   		() => {
-   				this.router.navigateByUrl('/');
+   		(user) => {
+				 console.log()
+				this.authService.login(user.email, user.password).subscribe(
+					(user) => {
+						this.router.navigateByUrl('/');
+					}
+				)
    			},
 	 	    (err: HttpErrorResponse) => {
 	 	    	alert(`${err.error.message}`);
