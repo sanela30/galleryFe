@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../component/auth/login/login.component';
 import { RegisterComponent } from '../component/auth/register/register.component';
 import { AllGalleriesComponent } from '../component/all-galleries/all-galleries.component';
+import { GuestGuard } from '../shared/guards/guest.guard';
+import { AuthGuard } from '../shared/guards/auth.guard';
 
 const appRoutes: Routes = [
   { path: '', 
@@ -13,9 +15,11 @@ const appRoutes: Routes = [
   },
 
   { path: 'allGalleries', 
-    component: AllGalleriesComponent
+   canActivate: [AuthGuard],
+   component: AllGalleriesComponent
   },
   { path: 'login', 
+   canActivate: [GuestGuard],
     component: LoginComponent
   },
   { path: 'register', 

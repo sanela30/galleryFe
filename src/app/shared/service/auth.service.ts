@@ -5,16 +5,21 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
+
+
 @Injectable()
 export class AuthService {
 
   public isAuthenticated:boolean;
+  
+ 
 
 
   constructor(private http: HttpClient,private router:Router) { 
 
     this.isAuthenticated=!!window.localStorage.getItem('loginToken');
   }
+
 
   public getRequestHeaders()
   {
@@ -37,5 +42,12 @@ export class AuthService {
       });
     });
   }
+
+  public logout()
+  {
+    window.localStorage.removeItem('loginToken');
+    this.isAuthenticated = false;
+    this.router.navigate(['/login']);
+}
 
 }
