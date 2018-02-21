@@ -1,0 +1,82 @@
+<h1>Register</h1>
+
+<form #registerForm="ngForm" (ngSubmit)="register(); registerForm.reset()">
+    <div class="form-group">
+    <label>First name</label>
+    <input #first_name="ngModel" [(ngModel)]="user.first_name" name='first_name' type="text" class="form-control" required minlength="3">
+
+    <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)"
+     class="alert alert-danger">
+      <div *ngIf="first_name.errors.required">
+        First name is required.
+      </div>
+      <div *ngIf="first_name.errors.minlength">
+        First_name must be at least 3 characters long.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Last name</label>
+    <input #last_name="ngModel" [(ngModel)]="user.last_name" name='last_name' type="text" class="form-control" required minlength="3">
+
+    <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)"
+     class="alert alert-danger">
+      <div *ngIf="last_name.errors.required">
+        Last name is required.
+      </div>
+      <div *ngIf="last_name.errors.minlength">
+        Last name must be at least 3 characters long.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Email address</label>
+    <input #email="ngModel" [(ngModel)]="user.email" name='email' type="text" class="form-control" required email>
+
+    <div *ngIf="email.invalid && (email.dirty || email.touched)"
+     class="alert alert-danger">
+      <div *ngIf="email.errors.required">
+        Email is required.
+      </div>
+      <div *ngIf="email.errors.email">
+        Please provide valid email address.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+      <label>Password</label>
+      <input #password="ngModel" [(ngModel)]="user.password" name='password' type="text" class="form-control"  pattern="\w*[0-9]{1,}\w*" required password>
+  
+      <div *ngIf="password.invalid && (password.dirty || password.touched)"
+       class="alert alert-danger">
+        <div *ngIf="password.errors.required">
+          Password is required.
+        </div>
+        <div *ngIf="password.errors.pattern">
+          Password must contain at least one number.
+        </div>
+      </div>
+    </div>
+
+  <div class="form-group" *ngIf="password.dirty">
+    <label>Confirm password </label>
+    <input #password_confirmation="ngModel" [(ngModel)]="user.password_confirmation" name='password_confirmation' type="text" class="form-control" required [equalTo]="password">
+
+    <div *ngIf="password_confirmation.invalid && (password_confirmation.dirty || password_confirmation.touched)"
+     class="alert alert-danger">
+      <div *ngIf="password_confirmation.errors.required">
+        Confirm password is required.
+      </div>
+      <div *ngIf="password_confirmation.errors.equalTo">
+        The confirmation doesn't match
+      </div>
+    </div>
+  </div>
+  <input name="accepted_terms" type="checkbox" [(ngModel)]="accepted_terms" required/>Accepted terms and conditions
+
+  <button type="button" class="btn"
+    (click)="registerForm.reset()"
+    [disabled]="registerForm.form.pristine">Reset</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Register</button>
+</form> 

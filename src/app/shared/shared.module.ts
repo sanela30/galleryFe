@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from './service/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
+//import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,6 +16,7 @@ import { GuestGuard } from './guards/guest.guard';
     AuthService,
     AuthGuard,
     GuestGuard,
+   // FormsModule
 
   ],
   declarations: []

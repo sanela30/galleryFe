@@ -12,6 +12,7 @@ import { AllGalleriesComponent } from './component/all-galleries/all-galleries.c
 import {SharedModule} from './shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CustomFormsModule } from 'ng2-validation';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     SharedModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CustomFormsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
