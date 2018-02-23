@@ -12,7 +12,7 @@ import { User } from '../model/user';
 export class AuthService {
 
   public isAuthenticated:boolean;
-  private user: User;
+  public user;
   
  
 

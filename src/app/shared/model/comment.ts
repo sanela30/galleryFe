@@ -1,4 +1,4 @@
-import {User} from "./user";
+
 
 export class Comment {
 
@@ -7,6 +7,6 @@ export class Comment {
         public content?: string,
         public gallery_id?: number,
         public user_id?: number,
-        public user?: User
+       
 ){}
 }

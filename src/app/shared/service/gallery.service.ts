@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import{Comment} from '../model/comment';
+import { HttpErrorResponse } from '@angular/common/http/src/response';
 
 @Injectable()
 export class GalleryService {
@@ -55,8 +56,8 @@ export class GalleryService {
                     c.id,
                     c.content,
                     c.gallery_id,
-                    c.user_id,
-                    c.user));
+                    c.user_id
+                    ));
 
 
                 o.next(this.comments);
@@ -64,5 +65,45 @@ export class GalleryService {
             });
         });
 }
+
+public addComment(comment: Comment) {
+            return new Observable((o: Observer<any>) => {
+                this.http.post('http://localhost:8000/api/comments', {
+                    content: comment.content,
+                    gallery_id: comment.gallery_id,
+                    user_id: comment.user_id
+                }, {
+                    headers: this.authService.getRequestHeaders()
+                }).subscribe((comments: any) => {
+                        const comment = new Comment(
+                            comments.id,
+                            comments.content,
+                            comments.gallery_id,
+                            comments.user_id);
+                        this.comments.push(comment);
+                        o.next(this.comments);
+                        return o.complete();
+                    }, (err: HttpErrorResponse) => {
+                        alert(`Backend returned code ${err.status} with message: ${err.error}`);
+                    }
+                );
+            });
+        }
+    
+        public removeComment(comment: Comment){
+        return new Observable((o: Observer<any>) => {
+            this.http.delete('http://localhost:8000/api/comment/' + comment.id,{
+                headers: this.authService.getRequestHeaders()
+            }).subscribe(
+                () => {
+                    const index = this.comments.indexOf(comment);
+                    this.comments.splice(index, 1);
+    
+                    o.next(index);
+                    return o.complete();
+                }
+            );
+        });
+    }
 
 }

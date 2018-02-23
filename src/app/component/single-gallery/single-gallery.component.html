@@ -24,12 +24,13 @@
 
 <h1>Comments</h1>
 <div *ngFor="let comment of comments.slice().reverse()" class="card border-light mb-3">
-    <div class="card-header">{{comment.user.first_name}} {{comment.user.last_name}}
+    <div class="card-header">{{comment?.user?.first_name}} {{comment?.user?.last_name}}
        
     </div>
     <div class="card-body">
-        <p class="card-text">{{comment.content}}</p>
+        <p class="card-text">{{comment?.content}}</p>
     </div>
+    <button *ngIf="auth.isAuthenticated" class="btn btn-secundary" (click)="removeComment(comment)" >Delete comment</button>
 </div>
 
 <form #commentForm="ngForm" (ngSubmit)="addComment(comment);commentForm.reset()">
