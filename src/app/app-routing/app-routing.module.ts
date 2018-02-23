@@ -9,6 +9,7 @@ import { GuestGuard } from '../shared/guards/guest.guard';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { CreateGalleryComponent } from '../component/create-gallery/create-gallery.component';
 import { MyGalleryComponent } from '../component/my-gallery/my-gallery.component';
+import { SingleGalleryComponent } from '../component/single-gallery/single-gallery.component';
 
 const appRoutes: Routes = [
   { path: '', 
@@ -35,6 +36,10 @@ const appRoutes: Routes = [
  { path: 'my-galleries', 
  canActivate: [AuthGuard],
  component: MyGalleryComponent
+},
+{ path: 'gallerie/:id', 
+ canActivate: [AuthGuard],
+ component: SingleGalleryComponent
 }
 
 ]

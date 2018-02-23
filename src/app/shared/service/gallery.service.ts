@@ -11,6 +11,7 @@ export class GalleryService {
               private authService: AuthService) { }
   
   private galleries;
+  private gallery;
   
   getGalleries(){
         this.galleries = [];
@@ -25,5 +26,20 @@ export class GalleryService {
             });
        });
       }
+ public getSingleGallery(id) {
+     this.gallery = [];
+    return new Observable((o: Observer<any>) => {
+        this.http.get(`http://localhost:8000/api/gallerie/${id}`, {
+        headers: this.authService.getRequestHeaders()
+        }).subscribe((gallery: any[]) => {
+    
+            this.gallery = gallery;
+    
+    
+            o.next(this.gallery);
+            return o.complete();
+        });
+    });
+    }
 
 }

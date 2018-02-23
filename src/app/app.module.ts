@@ -16,6 +16,7 @@ import { CustomFormsModule } from 'ng2-validation';
 
 import { MyGalleryComponent } from './component/my-gallery/my-gallery.component';
 import { CreateGalleryComponent } from './component/create-gallery/create-gallery.component';
+import { SingleGalleryComponent } from './component/single-gallery/single-gallery.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CreateGalleryComponent } from './component/create-gallery/create-galler
     RegisterComponent,
     AllGalleriesComponent,
     CreateGalleryComponent,
-    MyGalleryComponent
+    MyGalleryComponent,
+    SingleGalleryComponent
   ],
   imports: [
     BrowserModule,

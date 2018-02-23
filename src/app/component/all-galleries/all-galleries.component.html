@@ -1,5 +1,9 @@
 <div class="card mb-3" *ngFor="let gallery of galleries">
-    <h3 class="card-header">{{gallery.title}}</h3>
+    <h3 class="card-header">
+        <a href="gallerie/{{gallery.id}}">
+             {{gallery.title}}
+        </a>
+    </h3>
     <div class="card-body">
         <h5>{{ gallery.user?.first_name}} {{ gallery.user?.last_name}}</h5>
       <h5 class="card-title">Description</h5>
