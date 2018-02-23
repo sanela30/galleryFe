@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/service/auth.service';
 import { GalleryService } from '../../shared/service/gallery.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -14,21 +14,36 @@ export class SingleGalleryComponent implements OnInit {
   
   public gallery: any[] = [];
   private params;
+  public comments: Array<Comment> = [];
+  public comment: Comment = new Comment();
 
   constructor(
     public auth: AuthService, 
     public galleryService: GalleryService, 
-    public route: ActivatedRoute) { this.route.params.subscribe((params: Params) => {
+    public route: ActivatedRoute,
+    public router:Router){ this.route.params.subscribe((params: Params) => {
       this.params = params;
   });  
-       this.galleryService.getSingleGallery(this.params.id).subscribe(
+
+      this.galleryService.getSingleGallery(this.params.id).subscribe(
   data => {
       this.gallery = data;
   },
   (err: HttpErrorResponse) => {
       alert(`Backend returned code ${err.status} with message: ${err.error}`);
-  }
+  });
+
+  this.galleryService.getSingleGalleryComments(this.params.id).subscribe(
+    data => {
+        this.comments = data;
+    },
+    (err: HttpErrorResponse) => {
+        alert(`Backend returned code ${err.status} with message: ${err.error}`);
+    }
 );
+
+
+
 }
 
   ngOnInit() {

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import{Comment} from '../model/comment';
 
 @Injectable()
 export class GalleryService {
@@ -12,6 +13,7 @@ export class GalleryService {
   
   private galleries;
   private gallery;
+  private comments: Comment[] = [];
   
   getGalleries(){
         this.galleries = [];
@@ -41,5 +43,26 @@ export class GalleryService {
         });
     });
     }
+
+    public getSingleGalleryComments(id) {
+        this.comments = [];
+        return new Observable((o: Observer<any>) => {
+            this.http.get('http://localhost:8000/api/comments/' + id, {
+                headers: this.authService.getRequestHeaders()
+            }).subscribe((comments: any[]) => {
+
+                this.comments = comments.map(c => new Comment(
+                    c.id,
+                    c.content,
+                    c.gallery_id,
+                    c.user_id,
+                    c.user));
+
+
+                o.next(this.comments);
+                return o.complete();
+            });
+        });
+}
 
 }
