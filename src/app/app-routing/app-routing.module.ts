@@ -7,10 +7,13 @@ import { RegisterComponent } from '../component/auth/register/register.component
 import { AllGalleriesComponent } from '../component/all-galleries/all-galleries.component';
 import { GuestGuard } from '../shared/guards/guest.guard';
 import { AuthGuard } from '../shared/guards/auth.guard';
+import { CreateGalleryComponent } from '../component/create-gallery/create-gallery.component';
+import { MyGalleryComponent } from '../component/my-gallery/my-gallery.component';
 
 const appRoutes: Routes = [
   { path: '', 
     redirectTo: '/allGalleries',
+    canActivate: [AuthGuard],
     pathMatch: 'full',
   },
 
@@ -24,7 +27,15 @@ const appRoutes: Routes = [
   },
   { path: 'register', 
     component: RegisterComponent
-  }
+  },
+  { path: 'create', 
+  canActivate: [AuthGuard],
+  component: CreateGalleryComponent
+ },
+ { path: 'my-galleries', 
+ canActivate: [AuthGuard],
+ component: MyGalleryComponent
+}
 
 ]
 

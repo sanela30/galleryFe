@@ -62,8 +62,9 @@ register(firstName: string, lastName: string, email: string, password: string,pa
 
     })
       .subscribe(
-          (data: {token: string, user: Object}) => {
-
+          (data: {token: string, user: User}) => {
+            window.localStorage.setItem('loginToken',data.token);
+            this.isAuthenticated= true;
             this.user = new User(data['id'], data['firstName'], data['lastName'], data['email'], data['password_confirmation']);
             o.next(data);
             return o.complete();

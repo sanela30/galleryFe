@@ -14,7 +14,7 @@ import { AuthService } from '../../../shared/service/auth.service';
 })
 export class RegisterComponent{
 
-	user = new User();
+	public user:User= new User();
 	public errors: any[] = [];
 
   constructor(
@@ -29,33 +29,21 @@ export class RegisterComponent{
 					this.user.email, 
 					this.user.password,
 					this.user.password_confirmation)
-      .subscribe((user)=> {
-        this.router.navigateByUrl('/login');
+      .subscribe((user) => {
+        this.authService.login(this.user.email, this.user.password)
+        .subscribe((token) => {
+            this.router.navigateByUrl('/');
       },
+      (e)=>{
+        this.router.navigateByUrl('/');
+      }
+    );
+        },
         (err: HttpErrorResponse) => {
-          alert(`Backend returned code ${err.status} with message: ${err.error}`);
-        }
-      );
+          alert(`${err.error.message}`);
+        });
+       
+    }
 }
 
-  //  register() {
-  //  	this.authService.register(
-  // 		this.user.firstName, 
-  //  		this.user.lastName, 
-  // 		this.user.email, 
-	// 		 this.user.password,
-	// 		 this.user.password_confirmation
-  //  	).subscribe(
-  //  		(user) => {	
-	// 			this.authService.login(user.email, user.password).subscribe(
-	// 				(user) => {
-	// 					this.router.navigateByUrl('/login');
-	// 				}
-	// 			)
-  //  			},
-	//  	    (err: HttpErrorResponse) => {
-	//  	    	alert(`${err.error.message}`);
-	//  	    }
-  //  	);
-  //  }
-}
+  

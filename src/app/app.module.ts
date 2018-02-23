@@ -14,6 +14,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomFormsModule } from 'ng2-validation';
 
+import { MyGalleryComponent } from './component/my-gallery/my-gallery.component';
+import { CreateGalleryComponent } from './component/create-gallery/create-gallery.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,9 @@ import { CustomFormsModule } from 'ng2-validation';
     NavBarComponent,
     LoginComponent,
     RegisterComponent,
-    AllGalleriesComponent
+    AllGalleriesComponent,
+    CreateGalleryComponent,
+    MyGalleryComponent
   ],
   imports: [
     BrowserModule,
